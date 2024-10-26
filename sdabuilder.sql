@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 29, 2023 at 03:19 PM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Oct 23, 2024 at 06:41 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,154 +18,64 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sdabuilder`
+-- Database: `livebuilders`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `assign_project`
+-- Table structure for table `banners`
 --
 
-CREATE TABLE `assign_project` (
+CREATE TABLE `banners` (
   `id` int(11) NOT NULL,
-  `assign_project_id` int(11) DEFAULT NULL,
-  `assign_project_user_id` int(11) DEFAULT NULL,
-  `assign_project_description` varchar(1000) DEFAULT NULL,
-  `user_type` varchar(10) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `date` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `banner_name` varchar(100) DEFAULT NULL,
+  `status` varchar(10) DEFAULT NULL,
+  `photo` varchar(500) DEFAULT NULL,
+  `banner_title` varchar(100) DEFAULT NULL,
+  `description` varchar(200) DEFAULT NULL,
+  `banner_url` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `banners`
+--
+
+INSERT INTO `banners` (`id`, `banner_name`, `status`, `photo`, `banner_title`, `description`, `banner_url`) VALUES
+(1, 'SATISFACTION', '1', '1.png', 'SATISFACTION', '99% Guaranteed Satisfaction', ''),
+(2, 'ORIGNAL PRODUCTS', '1', '2.png', NULL, '100% Authentic & Branded Products', 'orignal_products'),
+(3, 'DEALS', '1', '3.png', NULL, 'Transparent & Competitive Best Pricing', 'deals'),
+(4, 'as', '1', NULL, NULL, 'fbg', 'as');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `attendance`
+-- Table structure for table `contact_details`
 --
 
-CREATE TABLE `attendance` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `date` date NOT NULL,
-  `time_in` varchar(10) NOT NULL,
-  `time_out` varchar(10) DEFAULT NULL,
-  `states` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `category`
---
-
-CREATE TABLE `category` (
-  `id` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `status` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `contact_details` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `full_name` varchar(50) DEFAULT '0',
+  `subject` varchar(50) DEFAULT '0',
+  `message` varchar(200) DEFAULT NULL,
+  `email_address` varchar(50) DEFAULT '0',
+  `phone` varchar(50) DEFAULT '0',
+  `status` varchar(20) DEFAULT NULL,
+  `enquiry_date` datetime(6) DEFAULT NULL,
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `category`
+-- Dumping data for table `contact_details`
 --
 
-INSERT INTO `category` (`id`, `name`, `status`) VALUES
-(1, 'Completed Projects', 'Active'),
-(2, 'Progress Projects', 'Active'),
-(3, 'Upcoming Projects', 'Active');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `chat`
---
-
-CREATE TABLE `chat` (
-  `id` int(10) NOT NULL,
-  `user_id` int(10) DEFAULT NULL,
-  `chat_message` varchar(500) DEFAULT NULL,
-  `to_id` int(10) DEFAULT NULL,
-  `date` datetime DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `chat`
---
-
-INSERT INTO `chat` (`id`, `user_id`, `chat_message`, `to_id`, `date`) VALUES
-(1, 1, 'Y', NULL, '2021-05-30 09:34:54'),
-(2, 1, 'Y', NULL, '2021-05-30 09:37:31'),
-(3, 1, 'Ol', NULL, '2021-05-31 10:35:13'),
-(4, 1, 'Ol', NULL, '2021-05-31 10:35:31'),
-(5, 3, 'Hi', NULL, '2021-06-10 13:03:09');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `equipment`
---
-
-CREATE TABLE `equipment` (
-  `id` int(11) NOT NULL,
-  `equipment_name` varchar(100) NOT NULL,
-  `total` varchar(100) NOT NULL,
-  `stock` varchar(100) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `date` date NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `login_details`
---
-
-CREATE TABLE `login_details` (
-  `id` int(10) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `date` date NOT NULL,
-  `time` time NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `more_images`
---
-
-CREATE TABLE `more_images` (
-  `id` int(10) NOT NULL,
-  `products_id` int(10) NOT NULL,
-  `order_id` int(10) NOT NULL,
-  `photo` varchar(50) NOT NULL,
-  `status` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `payment`
---
-
-CREATE TABLE `payment` (
-  `id` int(10) NOT NULL,
-  `project_id` int(10) NOT NULL,
-  `description` varchar(1000) DEFAULT NULL,
-  `amount` varchar(100) DEFAULT NULL,
-  `payed` varchar(100) DEFAULT NULL,
-  `balance` varchar(100) DEFAULT NULL,
-  `old_balance` varchar(10) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `date` date DEFAULT NULL,
-  `states` varchar(10) DEFAULT NULL,
-  `staff_id` int(10) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `payment`
---
-
-INSERT INTO `payment` (`id`, `project_id`, `description`, `amount`, `payed`, `balance`, `old_balance`, `user_id`, `date`, `states`, `staff_id`) VALUES
-(1, 2, 'ddd', NULL, '100000', '2100000', '2200000', 1, '2020-08-02', NULL, NULL);
+INSERT INTO `contact_details` (`id`, `full_name`, `subject`, `message`, `email_address`, `phone`, `status`, `enquiry_date`) VALUES
+(1, 'ashick', 'testing', NULL, 'administrator', '8072378567', '0', '2024-10-21 15:11:37.000000'),
+(4, 'ashick', 'testing', NULL, 'administrator', '8072378567', '1', '2024-10-21 15:31:16.000000'),
+(5, 'ashick', 'testing', NULL, 'administrator', '8072378567', '1', NULL),
+(7, 'ashick', 'testing', NULL, 'administrator', '8072378567', '1', NULL),
+(8, 'rudra', 'testing', NULL, 'administrator', '8072378264', '1', '2024-10-22 14:34:16.000000'),
+(9, 'ashick', 'testing', NULL, 'administrator', '8072378264', '0', '2024-10-22 14:34:32.000000');
 
 -- --------------------------------------------------------
 
@@ -174,8 +84,8 @@ INSERT INTO `payment` (`id`, `project_id`, `description`, `amount`, `payed`, `ba
 --
 
 CREATE TABLE `project` (
-  `id` int(11) NOT NULL,
-  `category_id` int(10) NOT NULL,
+  `id` int(11) NOT NULL ,
+  `project_status_id` int(20) DEFAULT NULL,
   `project_name` varchar(50) DEFAULT NULL,
   `project_owner` varchar(50) DEFAULT NULL,
   `project_mobile` varchar(20) DEFAULT NULL,
@@ -186,116 +96,69 @@ CREATE TABLE `project` (
   `pro_old_balance` varchar(10) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `date` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `project`
 --
 
-INSERT INTO `project` (`id`, `category_id`, `project_name`, `project_owner`, `project_mobile`, `project_email`, `project_amount`, `project_address`, `photo`, `pro_old_balance`, `user_id`, `date`) VALUES
-(1, 1, 'House', 'Ahamathu', '9585916253', 'ahamathu@gmail.com', '800000', 'Thiruvithancode', '1.jpg', NULL, 1, NULL),
-(2, 1, 'dsadas', 'dasdasdas', '2321312312', 'dsadsadas@yahoo.com', 'dsadasdas', 'dsadasdassadas@yahoo.com', '2.jpg', NULL, 1, NULL),
-(3, 1, 'Tutur', 'Har', '089675364', 'gjjjjyg@gmail.com', 'Adff', 'Hhhhhh', '3.jpg', NULL, 1, NULL),
-(4, 1, 'Fnnffj', 'Tjyyj', '09877689', 'gjjjjyg@gmail.com', 'Fnnt', 'Nfgngjgjg', '4.jpg', NULL, 1, NULL),
-(5, 2, NULL, NULL, NULL, NULL, NULL, NULL, '5.jpg', NULL, NULL, NULL),
-(6, 2, NULL, NULL, NULL, NULL, NULL, NULL, '6.jpg', NULL, NULL, NULL),
-(7, 2, NULL, NULL, NULL, NULL, NULL, NULL, '7.jpg', NULL, NULL, NULL),
-(8, 3, NULL, NULL, NULL, NULL, NULL, NULL, '8.jpg', NULL, NULL, NULL),
-(9, 3, NULL, NULL, NULL, NULL, NULL, NULL, '9.jpg', NULL, NULL, NULL),
-(10, 3, NULL, NULL, NULL, NULL, NULL, NULL, '10.jpg', NULL, NULL, NULL);
+INSERT INTO `project` (`id`, `project_status_id`, `project_name`, `project_owner`, `project_mobile`, `project_email`, `project_amount`, `project_address`, `photo`, `pro_old_balance`, `user_id`, `date`) VALUES
+(13, 2, 'Ashick', 'testing', '8072378264', 'alone@gmail.com', '5000', 'derik', '13.jpg', NULL, NULL, NULL),
+(14, 2, 'deva', 'ashicktesting', '8072378264', 'alone@gmail.com', '5000', 'Nagercoil', '14.jpg', NULL, NULL, NULL),
+(21, 1, 'JAGUAR', 'testing', '8072378264', 'ashickk@gmail.com', '5000', 'mela ramanputhor.', '21.jpg', NULL, NULL, NULL),
+(22, 3, 'MICHEAL', 'testing', '8072546437', 'Qwert@gmail.com', '5000', 'Rithapuram', '22.jpg', NULL, NULL, NULL),
+(23, 1, 'Ashick', 'testing', '8072378264', 'ashickk@gmail.com', '5000', 'saligramam', '23.jpg', NULL, NULL, NULL),
+(24, 3, 'Ashick', 'testing', '8072546437', 'ashickk@gmail.com', '5000', 'Gopichettipalayam', '24.jpg', NULL, NULL, NULL),
+(26, 1, 'Aara', 'testing', '8072546437', 'Qwert@gmail.com', '5000', 'Derik junction', '26.jpg', NULL, NULL, NULL),
+(27, 2, 'NP', 'testing', '8072546437', 'Qwert@gmail.com', '5000', 'Nagercoil', '27.jpg', NULL, NULL, NULL),
+(28, 3, 'Kingslee', 'testing', '8072546437', 'Qwert@gmail.com', '5000', 'Kanniyakumari', '28.jpg', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `salary`
+-- Table structure for table `project_image`
 --
 
-CREATE TABLE `salary` (
-  `id` int(10) NOT NULL,
-  `project_id` int(10) NOT NULL,
-  `hours` varchar(10) NOT NULL,
-  `description` varchar(1000) DEFAULT NULL,
-  `amount` varchar(100) DEFAULT NULL,
-  `payed` varchar(100) DEFAULT NULL,
-  `balance` varchar(100) DEFAULT NULL,
-  `old_balance` varchar(10) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `date` date DEFAULT NULL,
-  `states` varchar(10) DEFAULT NULL,
-  `staff_id` int(10) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `salary`
---
-
-INSERT INTO `salary` (`id`, `project_id`, `hours`, `description`, `amount`, `payed`, `balance`, `old_balance`, `user_id`, `date`, `states`, `staff_id`) VALUES
-(1, 1, '8', NULL, '900', '200', '700', '', 1, '2020-08-02', 'Salary', 3),
-(2, 1, '8', NULL, '900', '100', '800', '', 1, '2020-08-03', 'Salary', 3),
-(3, 1, '8', NULL, '900', '100', '800', '', 1, '2020-08-01', 'Salary', 3),
-(4, 1, '8', NULL, '900', '300', '600', '', 1, '2020-07-31', 'Salary', 3),
-(5, 1, '8', NULL, '900', '0', '900', '', 1, '2020-07-29', 'Salary', 3),
-(6, 1, '8', NULL, '900', '400', '500', '', 1, '2020-07-28', 'Salary', 3),
-(7, 1, '4', NULL, '450', '300', '150', '', 1, '2020-08-02', 'Salary', 3),
-(8, 2, '8', NULL, '900', '400', '500', '', 1, '2020-08-02', 'Salary', 6);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `sda_image`
---
-
-CREATE TABLE `sda_image` (
-  `id` int(10) NOT NULL,
-  `project_id` varchar(10) NOT NULL,
-  `photo` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `sda_image`
---
-
-INSERT INTO `sda_image` (`id`, `project_id`, `photo`) VALUES
-(4, '2', '4.jpg'),
-(6, '20', '6.php'),
-(7, '23', '7.jpg'),
-(8, '20', '8.php'),
-(9, '14', '9.php'),
-(10, '14', '10.php'),
-(11, '16', '11.php'),
-(12, '16', '12.php');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `staff`
---
-
-CREATE TABLE `staff` (
+CREATE TABLE `project_image` (
   `id` int(11) NOT NULL,
   `project_id` int(11) DEFAULT NULL,
-  `equ_id` int(11) DEFAULT NULL,
-  `qty` varchar(100) DEFAULT NULL,
-  `status` varchar(100) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `date` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `photo` varchar(50) DEFAULT NULL,
+  `s_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `project_image`
+--
+
+INSERT INTO `project_image` (`id`, `project_id`, `photo`, `s_id`) VALUES
+(14, 12, 'veni-12.jpg', NULL),
+(15, 12, 'veni-12.jpg', NULL),
+(16, 13, 'deva-13.jpg', NULL),
+(17, 14, 'deva-14.jpg', NULL),
+(18, 23, 'ashick-23.jpg', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `supervisor`
+-- Table structure for table `project_status`
 --
 
-CREATE TABLE `supervisor` (
+CREATE TABLE `project_status` (
   `id` int(11) NOT NULL,
-  `project_id` int(11) NOT NULL,
-  `equ_id` int(11) NOT NULL,
-  `qty` varchar(100) NOT NULL,
-  `status` varchar(100) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `project_status_name` varchar(50) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL,
+  `created_at` datetime(6) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `project_status`
+--
+
+INSERT INTO `project_status` (`id`, `project_status_name`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Upcoming Projects', 1, NULL, NULL),
+(2, 'Progress Projects', 1, NULL, NULL),
+(3, 'Completed Projects', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -304,108 +167,66 @@ CREATE TABLE `supervisor` (
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `company` varchar(100) DEFAULT NULL,
-  `full_name` varchar(50) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `password` varchar(50) DEFAULT NULL,
-  `mobile` varchar(50) DEFAULT NULL,
-  `address` varchar(500) DEFAULT NULL,
-  `user_type` varchar(100) DEFAULT NULL,
+  `id` int(10) NOT NULL,
+  `user_type_id` int(10) DEFAULT NULL,
+  `full_name` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(500) NOT NULL,
   `designation` varchar(20) NOT NULL,
-  `amount` varchar(10) DEFAULT NULL,
-  `salary` varchar(10) DEFAULT NULL,
-  `status` varchar(10) DEFAULT NULL,
-  `photo` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `mobile` int(11) NOT NULL,
+  `facebook` varchar(1000) NOT NULL,
+  `twitter` varchar(1000) NOT NULL,
+  `linkedin` varchar(1000) NOT NULL,
+  `address` varchar(200) NOT NULL,
+  `status` varchar(10) NOT NULL,
+  `date` date NOT NULL,
+  `user_id` int(10) NOT NULL,
+  `photo` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `company`, `full_name`, `email`, `password`, `mobile`, `address`, `user_type`, `designation`, `amount`, `salary`, `status`, `photo`) VALUES
-(1, NULL, 'Siva Sivakumar', 'sdabuilder@gmail.com', 'siva123$', '9626646255', '', 'admin', 'Mannaging Director', NULL, '', 'Active', '1.jpg'),
-(2, NULL, 'Stebin', 'stebinsenoth12@gmail.com', '16508002', '6382841379', '', 'admin', 'Engineer', NULL, '', 'Active', '2.jpg'),
-(3, NULL, 'Ramesh', '', '', '', '', 'Staff', '', NULL, '950', 'Active', NULL),
-(4, '', 'SELVAN', '', '', '', '', 'Staff', '', '', '900', 'Inactive', ''),
-(5, '', 'VARKEESH', '', '', '', '', 'Staff', '', '', '900', 'Active', ''),
-(6, '', 'XAVIAR', '', '', '', '', 'Staff', '', '', '950', 'Active', ''),
-(7, '', 'WILSON', '', '', '', '', 'Staff', '', '', '850', 'Inactive', ''),
-(8, '', 'THEVADAS', '', '', '', '', 'Staff', '', '', '750', 'Active', ''),
-(9, '', 'IYYAPPAN', '', '', '', '', 'Staff', '', '', '825', 'Active', ''),
-(10, '', 'VINU', '', '', '', '', 'Staff', '', '', '875', 'Active', ''),
-(12, '', 'SIVA KUMAR', '', '', '', '', 'Staff', '', '', '900', 'Inactive', ''),
-(13, '', 'KUMAR', '', '', '', '', 'Staff', '', '', '825', 'Active', ''),
-(17, '', 'VELAPPAN', '', '', '', '', 'Staff', '', '', '725', 'Active', ''),
-(19, '', 'ABISHEK', 'sa@df.mu', 'ssssssssssssssss', '', '', 'Staff', '', '', '725', 'Active', '19.php'),
-(21, '', 'SELVI', '', '', '', '', 'Staff', '', '', '650', 'Active', ''),
-(24, NULL, 'ALBIN', '', '', '', '', 'Staff', '', NULL, '725', 'Active', NULL),
-(25, NULL, 'Ani Kumar', '', '', '', '', 'Supervisor', '', NULL, '875', 'Active', '25.jpg'),
-(26, NULL, 'Paalraj', '', '', '', '', 'Supervisor', '', NULL, '900', 'Active', '26.jpg'),
-(27, NULL, 'Raja Kumar', '', '', '', '', 'Staff', '', NULL, '900', 'Active', '27.jpg'),
-(28, NULL, 'Biju', '', '', '', '', 'Staff', '', NULL, '900', 'Active', NULL),
-(29, NULL, 'Raj', '', '', '', '', 'Staff', '', NULL, '900', 'Active', NULL),
-(30, NULL, 'Durai', '', '', '', '', 'Staff', '', NULL, '875', 'Active', NULL),
-(31, NULL, 'Subish', '', '', '', '', 'Staff', '', NULL, '725', 'Active', NULL),
-(32, NULL, 'Satheesh', '', '', '', '', 'Staff', '', NULL, '650', 'Active', NULL),
-(33, NULL, 'Ajith', '', '', '', '', 'Staff', '', NULL, '650', 'Active', NULL),
-(34, NULL, 'Pavith', '', '', '', '', 'Staff', '', NULL, '650', 'Active', NULL),
-(35, NULL, 'Prasanth', '', '', '', '', 'Staff', '', NULL, '650', 'Active', NULL),
-(36, NULL, 'dsfsfsfasda', 'hadeh@gmail.com', 'jb', '3453534443242', 'sdfsdfs', 'Staff', 'hadeh123', NULL, 'dsfsdf', 'Active', '36.php'),
-(37, NULL, 'dhndnd', 'abc@gmail.com', 'cnncx', '8272772', 'dhdhd', 'Staff', 'jshshsh', NULL, 'djhdd', 'Active', '37.php'),
-(38, NULL, 'AlfanGanz', 'apa@gmail.com', 'Shadow', '084646464646', 'Black Hat\r\nF', 'Staff', 'axgans1337', NULL, 'Salary', 'Active', '38.php'),
-(39, NULL, 'Alfan Cok', 'alfanxcode@gmail.com', 'Shadow', '0859138367578', 'Official Website\r\nIndonesia', 'Staff', 'Hshsjss', NULL, 'Salary', 'Active', '39.html');
+INSERT INTO `users` (`id`, `user_type_id`, `full_name`, `email`, `password`, `designation`, `mobile`, `facebook`, `twitter`, `linkedin`, `address`, `status`, `date`, `user_id`, `photo`) VALUES
+(1, 1, 'Live Builders', 'livebuilders@gmail.com', '$2y$10$gMKkB0s2IF/iUDcIhThk9esA0QKrU/g3/yQqv4lOtqN/trTrhjOwq', '12345', 1234567890, 'CEO', 'Managing Director', 'linked.com', 'Kanyakumari', 'Active', '2019-05-15', 0, '1-u.php');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_type`
+--
+
+CREATE TABLE `user_type` (
+  `id` int(11) NOT NULL,
+  `user_type_name` varchar(20) DEFAULT NULL,
+  `status` varchar(10) DEFAULT NULL,
+  `created_at` datetime(6) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_type`
+--
+
+INSERT INTO `user_type` (`id`, `user_type_name`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', '1', NULL, NULL),
+(2, 'Staff', '1', NULL, NULL);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `assign_project`
+-- Indexes for table `banners`
 --
-ALTER TABLE `assign_project`
+ALTER TABLE `banners`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `attendance`
+-- Indexes for table `contact_details`
 --
-ALTER TABLE `attendance`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `category`
---
-ALTER TABLE `category`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `chat`
---
-ALTER TABLE `chat`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `equipment`
---
-ALTER TABLE `equipment`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `login_details`
---
-ALTER TABLE `login_details`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `more_images`
---
-ALTER TABLE `more_images`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `payment`
---
-ALTER TABLE `payment`
+ALTER TABLE `contact_details`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -415,27 +236,15 @@ ALTER TABLE `project`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `salary`
+-- Indexes for table `project_image`
 --
-ALTER TABLE `salary`
+ALTER TABLE `project_image`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `sda_image`
+-- Indexes for table `project_status`
 --
-ALTER TABLE `sda_image`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `staff`
---
-ALTER TABLE `staff`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `supervisor`
---
-ALTER TABLE `supervisor`
+ALTER TABLE `project_status`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -445,92 +254,56 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `user_type`
+--
+ALTER TABLE `user_type`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `assign_project`
+-- AUTO_INCREMENT for table `banners`
 --
-ALTER TABLE `assign_project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `banners`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `attendance`
+-- AUTO_INCREMENT for table `contact_details`
 --
-ALTER TABLE `attendance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `category`
---
-ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `chat`
---
-ALTER TABLE `chat`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `equipment`
---
-ALTER TABLE `equipment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `login_details`
---
-ALTER TABLE `login_details`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `more_images`
---
-ALTER TABLE `more_images`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `payment`
---
-ALTER TABLE `payment`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `contact_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
--- AUTO_INCREMENT for table `salary`
+-- AUTO_INCREMENT for table `project_image`
 --
-ALTER TABLE `salary`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+ALTER TABLE `project_image`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT for table `sda_image`
+-- AUTO_INCREMENT for table `project_status`
 --
-ALTER TABLE `sda_image`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT for table `staff`
---
-ALTER TABLE `staff`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `supervisor`
---
-ALTER TABLE `supervisor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `project_status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `user_type`
+--
+ALTER TABLE `user_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
